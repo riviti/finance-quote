@@ -15,25 +15,25 @@ my $q      = Finance::Quote->new();
 my $year   = (localtime())[5] + 1900;
 my $lastyear = $year - 1;
 
-my @stocks = ("0P00000RSZ","BOGUS");
+my @stocks = ("0P0000G38D","BOGUS");
 
 my %quotes = $q->fetch("morningstar",@stocks);
 ok(%quotes);
 
-# Check the nav values are defined. These are the most
-# used and most reliable indicators of success.
-ok($quotes{"0P00000RSZ","nav"} > 0);
-ok(length($quotes{"0P00000RSZ","name"}) > 0);
-ok($quotes{"0P00000RSZ","success"});
-ok($quotes{"0P00000RSZ", "currency"} eq "USD");
-ok(substr($quotes{"0P00000RSZ","isodate"},0,4) == $year ||
-   substr($quotes{"0P00000RSZ","isodate"},0,4) == $lastyear);
-ok(substr($quotes{"0P00000RSZ","date"},6,4) == $year ||
-   substr($quotes{"0P00000RSZ","date"},6,4) == $lastyear);
+# Check the nav values are defined.  These are the most
+#  used and most reliable indicators of success.
+ok($quotes{"0P0000G38D","nav"} > 0);
+ok(length($quotes{"0P0000G38D","name"}) > 0);
+ok($quotes{"0P0000G38D","success"});
+ok($quotes{"0P0000G38D", "currency"} eq "SEK");
+ok(substr($quotes{"0P0000G38D","isodate"},0,4) == $year ||
+   substr($quotes{"0P0000G38D","isodate"},0,4) == $lastyear);
+ok(substr($quotes{"0P0000G38D","date"},6,4) == $year ||
+   substr($quotes{"0P0000G38D","date"},6,4) == $lastyear);
 
 # Make sure we don't have spurious % signs.
 
-ok($quotes{"0P00000RSZ","p_change"} !~ /%/);
+ok($quotes{"0P0000G38D","p_change"} !~ /%/);
 
 # Check that a bogus stock returns no-success.
 ok(! $quotes{"BOGUS","success"});
